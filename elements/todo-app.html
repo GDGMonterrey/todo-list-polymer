@@ -47,11 +47,29 @@
         value: [{ task: "Terminar presentación"}]
       }
     },
-
+    taskDone: function (e) {
+      console.log("La tarea es: "+e.target.task);
+      var index = getTodoIndexTask(this.todos, e.target.task);
+      this.splice('todos', index, 1);
+      console.log("Se encuentra en el indice: "+index);
+    },
     saveTask: function(e) {
       var task = this.$.task.value;
       this.$.task.value = "";
       this.push('todos',{task: task});
-    }                                                                                                                                         
+    },
+    ready: function(e){
+      this.addEventListener('isDone', this.taskDone);
+    }
   });
+
+  function getTodoIndexTask(todos,value){
+      var index = -1;
+      for (var i = 0; i < todos.length; i++) {
+        if (todos[i].task === value){
+          index = i;
+        }
+      }
+      return index;
+    }
 </script>
