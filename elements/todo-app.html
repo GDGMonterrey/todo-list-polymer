@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="../bower_components/polymer/polymer.html" rel="import">
+    <link href="../elements/todo-element.html" rel="import">
+    <link href="../bower_components/paper-drawer-panel/paper-drawer-panel.html" rel="import">
+    <link href="../bower_components/paper-header-panel/paper-header-panel.html" rel="import">
+    <link href="../bower_components/paper-toolbar/paper-toolbar.html" rel="import">
+    <link href="../bower_components/paper-material/paper-material.html" rel="import">
+    <link href="../bower_components/paper-item/paper-item.html" rel="import">
+    <link href="../bower_components/paper-input/paper-input.html" rel="import">
+    <link href="../bower_components/paper-fab/paper-fab.html" rel="import">
+    <link href="../bower_components/iron-icons/iron-icons.html" rel="import">
+</head>
+
+<dom-module id="todo-app">
+  
+  <template>
+    <paper-drawer-panel>
+      <paper-header-panel main class="main-panel">
+        <paper-toolbar>
+          <paper-item>Todo-List</paper-item>
+        </paper-toolbar>
+        <div style="border-left: 1px solid #ccc;">
+          <paper-material id="entries" elevation="2">
+            <paper-input id="task" label="Task" style="width:90%;display: inline-block"></paper-input>
+            </paper-input> 
+            <paper-fab icon="icons:add" on-tap="saveTask"></paper-fab>
+          </paper-material>
+          <div id="todos">
+            <template id="tasks" is="dom-repeat" items="{{todos}}">
+              <todo-element task="{{item.task}}"></todo-element>
+            </template>
+          </div>
+        </div>
+      </paper-header-panel>
+    </paper-drawer-panel> 
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: "todo-app",
+    properties: {
+      todos: {
+        type: Array,
+        value: [{ task: "Terminar presentación"}]
+      }
+    },
+
+    saveTask: function(e) {
+      var task = this.$.task.value;
+      this.$.task.value = "";
+      this.push('todos',{task: task});
+    }                                                                                                                                         
+  });
+</script>
