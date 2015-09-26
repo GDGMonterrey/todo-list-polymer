@@ -17,6 +17,16 @@
   
   <template>
     <paper-drawer-panel>
+      <paper-header-panel class="side-panel" drawer>
+        <paper-toolbar>
+          <paper-item>Done</paper-item>
+        </paper-toolbar>
+        <paper-menu id="completed" class="list">
+          <template id="done" is="dom-repeat" items="{{done}}">
+            <paper-item>{{item.task}}</paper-item>
+          </template>
+        </paper-menu>
+      </paper-header-panel>
       <paper-header-panel main class="main-panel">
         <paper-toolbar>
           <paper-item>Todo-List</paper-item>
@@ -45,12 +55,17 @@
       todos: {
         type: Array,
         value: [{ task: "Terminar presentación"}]
+      },
+      done: {
+        type: Array,
+        value: []
       }
     },
     taskDone: function (e) {
       console.log("La tarea es: "+e.target.task);
       var index = getTodoIndexTask(this.todos, e.target.task);
-      this.splice('todos', index, 1);
+      var task = this.splice('todos', index, 1)[0];
+      this.push('done', task);
       console.log("Se encuentra en el indice: "+index);
     },
     saveTask: function(e) {
