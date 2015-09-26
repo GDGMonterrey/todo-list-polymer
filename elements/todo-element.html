@@ -3,14 +3,16 @@
 <head>
   <link rel="import" href="../bower_components/polymer/polymer.html">
   <link rel="import" href="../bower_components/paper-item/paper-item.html">
+  <link href="../bower_components/paper-checkbox/paper-checkbox.html" rel="import">
   <link rel="import" href="../bower_components/paper-material/paper-material.html">
 </head>
 
-<dom-module id="todo-element">
+<dom-module id="todo-element" attributes="task">
   <style>
   </style>
   <template>
     <paper-material class="todo" elevation="1">
+      <paper-checkbox checked="{{done}}"></paper-checkbox>
       <paper-item id="task">{{task}}</paper-item>
     </paper-material>
   </template>
@@ -22,7 +24,15 @@
       task: {
         type: String,
         value: "Develop apps!"
+      },
+      done: {
+        type: Boolean,
+        value: false,
+        observer:'taskDone'
       }
+    },
+    taskDone: function(e){
+      if(e){ this.fire('isDone',this); }
     }
   });
 </script>
