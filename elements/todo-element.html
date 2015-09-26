@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="import" href="../bower_components/polymer/polymer.html">
+  <link rel="import" href="../bower_components/paper-item/paper-item.html">
+  <link rel="import" href="../bower_components/paper-material/paper-material.html">
+</head>
+
+<dom-module id="todo-element">
+  <style>
+  </style>
+  <template>
+    <paper-material class="todo" elevation="1">
+      <paper-item id="task">{{task}}</paper-item>
+    </paper-material>
+  </template>
+</dom-module>
+<script>
+  Polymer({
+    is: "todo-element",
+    properties: {
+      task: {
+        type: String,
+        value: "Develop apps!"
+      }
+    }
+  });
+</script>
