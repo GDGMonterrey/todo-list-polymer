@@ -16,23 +16,23 @@
       <paper-item id="task">{{task}}</paper-item>
     </paper-material>
   </template>
-</dom-module>
-<script>
-  Polymer({
-    is: "todo-element",
-    properties: {
-      task: {
-        type: String,
-        value: "Develop apps!"
+  <script>
+    Polymer({
+      is: "todo-element",
+      properties: {
+        task: {
+          type: String,
+          value: "Develop apps!"
+        },
+        done: {
+          type: Boolean,
+          value: false,
+          observer:'taskDone'
+        }
       },
-      done: {
-        type: Boolean,
-        value: false,
-        observer:'taskDone'
+      taskDone: function(e){
+        if(e){ this.fire('isDone',this); }
       }
-    },
-    taskDone: function(e){
-      if(e){ this.fire('isDone',this); }
-    }
-  });
-</script>
+    });
+  </script>
+</dom-module>
